@@ -1,0 +1,51 @@
+# Sample file. Not under use.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: playground-web
+  labels:
+    app: playground-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: playground-web
+  template:
+    metadata:
+      labels:
+        app: playground-web
+    spec:
+      containers:
+      - name: playground-web
+        image: playground-web:latest
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+        volumeMounts:
+        - name: app-source
+          mountPath: /app
+      volumes:
+      - name: app-source
+        hostPath:
+          path: /src/Playground/Playground.Web
+          type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: playground-web-service
+spec:
+  selector:
+    app: playground-web
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP
