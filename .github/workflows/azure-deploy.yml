@@ -17,7 +17,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     environment:
-      name: ${{ startsWith(github.ref_name, 'releases/') && 'prod' || github.ref_name == 'main' && 'dev' || 'dev' }}
+      name: ${{ startsWith(github.ref, 'refs/tags/releases/') && 'prod' || github.ref_name == 'main' && 'dev' || 'dev' }}
 
     steps:
       - uses: actions/checkout@v4
