@@ -1,0 +1,41 @@
+# For more samples to get started with GitHub Action workflows to deploy to Azure: https://github.com/Azure/actions-workflow-samples
+
+name: Deploy to Azure App Service
+
+env:
+  AZURE_WEBAPP_PACKAGE_PATH: './publish/playground-web'
+
+on:
+  push:
+    branches: [ "main", "releases/*" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ startsWith(github.ref_name, 'releases/') && 'prod' || github.ref_name == 'main' && 'dev' || 'dev' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: dotnet build and publish
+        run: |
+          dotnet build ./src/Playground/Playground.sln --configuration Release
+          dotnet publish ./src/Playground/Playground.Web/Playground.Web.csproj -c Release -o ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ vars.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
