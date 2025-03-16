@@ -9,21 +9,24 @@ Measures taken
 ### Changes are reviewed and approved appropriately before merging.
 - Implemented Branch Protection rules
     - Mandated pull requests. 
-    - Required at least 1 approval before merging. 
+    - Required at least 1 approval before merging. (Disabled temporarily because I'm the only contributor)
     - Required review from Code Owners.
     - Blocked force push to main branch. 
     - Automated tests need to pass before merging to main. 
     - Required branches to be up to date before merging and linear. 
     - Restricted deletion.
-    - Required code scanning results. 
-- Branching strategy compatible with trunk based development or github flow. 
+    - Required code scanning results. (Disabled temporarily)
+    - Branching strategy compatible with trunk based development or github flow. 
     - Merge feature branches to main after ensuring tests are successful. 
     
     main --(deploy to)--> dev/staging <br>
     tags/releases/* --(deploy to)--> prod <br>
 
+![Diagram](branching.drawio.png)
+
 ### Automation is in place to validate and deploy code efficiently, considering different environments.
-- Managing dev and prod environments
+- Managing dev and prod environments.
+- Manual review before deploy to prod.
 - Publish profiles for Azure App Service managed as Secrets
 - Azure App names stored as env variables. 
 - Enabled depandabot for automating security updates.
@@ -34,10 +37,6 @@ Measures taken
 
     Dev: https://dev-spiff.azurewebsites.net/ <br>
     Prod: https://prod-spiff.azurewebsites.net/ <br>
-
- ### Branching/Deployment Diagram 
-
-![Diagram](branching.drawio.png)
 
 ## Possible future enhancements 
 - Enable Code signing and enforce 2FA org wide. 
