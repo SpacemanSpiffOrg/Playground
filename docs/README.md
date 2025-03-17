@@ -5,6 +5,7 @@
 Measures taken
 - Created Org and Teams (Leads, QA and DevOps) with appropriate permissions according to their responsibility.
 - Enforced Code Owners.
+-Enabled 2FA for users.
 
 ### Changes are reviewed and approved appropriately before merging.
 - Implemented Branch Protection rules
@@ -39,6 +40,7 @@ Measures taken
     Prod: https://prod-spiff.azurewebsites.net/ <br>
 
 ## Possible future enhancements 
-- Enable Code signing and enforce 2FA org wide. 
+- Enforce Code signing.
 - Optimize github actions to cache dependencies and save artifacts to re-use build outputs. 
 -  Implement semantic versioning and tagging of containers, deploy the same container to multiple environments. 
+- Document Governance details (Team structure, Coding and Contribution guidelines etc.)

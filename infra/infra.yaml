@@ -1,4 +1,4 @@
-# Sample file. Not under use.
+# Sample file to verify Codeowners. Not under use.
 
 apiVersion: apps/v1
 kind: Deployment

@@ -18,6 +18,7 @@ public class CounterCSharpTests : TestContext
         cut.Find("p").MarkupMatches("<p role=\"status\">Current count: 0</p>");
     }
 
+    // Verifies that the counter increments when the button is clicked
     [Fact]
     public void ClickingButtonIncrementsCounter()
     {
