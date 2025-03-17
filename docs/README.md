@@ -17,10 +17,12 @@ Measures taken
     - Restricted deletion.
     - Required code scanning results. (Disabled temporarily)
     - Branching strategy compatible with trunk based development or github flow. 
-    - Merge feature branches to main after ensuring tests are successful. 
-    
-    main --(deploy to)--> dev/staging <br>
-    tags/releases/* --(deploy to)--> prod <br>
+    - Merge feature branches to main after ensuring tests are successful. <br>
+        main --(deploy to)--> dev/staging <br>
+        tags/releases/* --(deploy to)--> prod <br>
+        `main` branch is deployed continously to `dev`/`staging` server. 
+        Ensures that automated tests are successful and dev/users can verify the changes here.
+        `main` to `prod` is only deployed on `releases/*` tags. This ensures that changes to `prod` can be batched. Also `prod` env has required reviewers to approve before pushing to `prod`. Both these act as gates to ensure that there are no accidental changes pushed to `prod`.
 
 ![Diagram](branching.drawio.png)
 
